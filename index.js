@@ -29,11 +29,9 @@ const generateId = (arr) => {
 
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 app.use(morgan((tokens, req, res) => {
   const response = ':method :url :status :res[content-length] - :response-time ms';
   return [
@@ -45,6 +43,7 @@ app.use(morgan((tokens, req, res) => {
     tokens.method(req, res) === 'POST' ? JSON.stringify(req.body) : ''
   ].join(' ');
 }));
+app.use(express.static(dist));
 
 app.get('/api/persons', (request, response) => {
   response.json(persons);
