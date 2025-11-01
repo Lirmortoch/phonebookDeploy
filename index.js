@@ -43,7 +43,7 @@ app.use(morgan((tokens, req, res) => {
     tokens.method(req, res) === 'POST' ? JSON.stringify(req.body) : ''
   ].join(' ');
 }));
-app.use(express.static(dist));
+app.use(express.static("dist"));
 
 app.get('/api/persons', (request, response) => {
   response.json(persons);
